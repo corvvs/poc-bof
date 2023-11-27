@@ -10,5 +10,9 @@ down:
 it:
 	docker compose exec app bash
 
+.PHONY: kill_aslr
+kill_aslr:
+	sudo bash -c 'echo 0 > /proc/sys/kernel/randomize_va_space'
+
 a.out:
-	gcc -no-pie c.c
+	gcc -m32 -z execstack c.c
